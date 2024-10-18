@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Reservation List</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .reservation-list {
+            margin-top: 30px;
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .reservation-item {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        p , h5 {
+            font-size: 1rem;
+            color: #495057;
+            margin-bottom: 5px;
+        }
+        .reservation-status {
+            font-weight: bold;
+        }
+        .cancel-btn {
+            background-color: #ff6b6b !important;
+            border-color: #ff6b6b !important;
+            color: white !important;
+        }
+        .cancel-btn:hover {
+            background-color: #e63946;
+            border-color: #e63946;
+        }
+    </style>
+</head>
+<body>
+
+<div th:insert="userNavbar"></div>
+<div class="container">
+
+    <!-- Reservation List -->
+    <p class="text-left my-5" style="margin-top: 100px !important;">My Reservations</p>
+    <ul class="reservation-list" th:if="${userReservations != null}">
+    	<p th:text="${message}" style="color: red;"></p>
+        <!-- Example Reservation Item -->
+        <li class="reservation-item" th:each="reservation: ${userReservations}">
+            <div >
+                <h5 class="reservation-info" th:text="'Restaurant:'+ ${reservation.tableId.resDetailsId.restaurantName}">Restaurant: The Great Bistro</h5>
+                <p class="reservation-date"  th:text="'Date:' + ${reservation.date}">Date: 2024-09-23</p>
+                <p class="reservation-info" th:text="'Time:' + ${reservation.time}">Time: 7:00 PM</p>
+                <p class="reservation-info" th:text="'Table no:'+ ${reservation.tableId.tableNo}">Table: 12</p>
+                <p class="reservation-info" th:text="'Party Size:'+ ${reservation.partySize}">Party Size: 4</p>
+                <p class="reservation-info" th:text="'Special Request:'+ ${reservation.specialRequest}">Special Request: Window seat</p>
+                <p class="reservation-status text-success" id="reservation-status" th:text="'Status:' +${reservation.staus}">Status: Confirmed</p>
+            </div>
+            <!-- Cancel Button -->
+            <form method="post" action="/user/cancel-reservation" class="mb-0">
+            <p th:text="${reservation.id}"></p>
+                <input type="hidden" name="reservationId" th:value="${reservation.id}" />
+                <button type="submit" class="btn cancel-btn">Cancel Reservation</button>
+            </form>
+        </li>
+
+        
+    </ul>
+</div>
+
+<!-- Bootstrap JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Get all reservation items
+    let reservationItems = document.querySelectorAll(".reservation-item");
+
+    // Get the current date
+    let currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0); // Set to midnight to compare only dates
+
+    reservationItems.forEach(function(item) {
+        // Get the reservation date text (format assumed 'dd/MM/yyyy')
+        let dateElement = item.querySelector(".reservation-date");
+        let dateText = dateElement.textContent.replace('Date: ', '').trim();
+		
+        console.log(dateText)
+        // Split the dateText into components (dd/MM/yyyy)
+        let reservedDate = convertToJsDate(dateText);
+		
+        console.log(reservedDate) 
+        // Manually construct the date object with proper values
+       
+       
+            // Compare the reservation date with the current date
+            if (reservedDate < currentDate) {
+                // If the reservation date has passed, set the background to red
+                item.style.backgroundColor = "#f8d7da";  // Light red color
+            }
+        
+    });
+});
+
+function convertToJsDate(dateStr) {
+    // Split the date string into day, month, and year
+    var dateParts = dateStr.split('/');
+
+    // Extract day, month, and year from the dateParts array
+    var day = parseInt(dateParts[0], 10); // day is the first part
+    var month = parseInt(dateParts[1], 10) - 1; // month is zero-indexed in JS (subtract 1)
+    var year = parseInt(dateParts[2], 10); // year is the third part
+
+    // Create and return the JavaScript Date object
+    return new Date(year, month, day);
+}
+
+
+</script>
+</body>
+</html>

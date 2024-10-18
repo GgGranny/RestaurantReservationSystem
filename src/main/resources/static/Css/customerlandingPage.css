@@ -1,0 +1,178 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Navigation Bar */
+nav {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+}
+
+nav .logo {
+    float: left;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+nav .nav-links {
+    float: right;
+    list-style-type: none;
+}
+
+nav .nav-links li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+nav::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Hero Section */
+.hero {
+    background-image: url('https://via.placeholder.com/1200x600');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 100px 0;
+}
+
+.hero h2 {
+    font-size: 48px;
+    font-weight: 600;
+}
+
+.hero p {
+    font-size: 20px;
+    margin: 20px 0;
+}
+
+.hero .btn {
+    padding: 10px 20px;
+    background-color: #FF7043;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+/* About Us Section */
+.about {
+    padding: 60px 0;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.about h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.about p {
+    font-size: 18px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Menu Section */
+.menu {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.menu h2 {
+    font-size: 36px;
+    margin-bottom: 40px;
+}
+
+.menu-grid {
+    display: flex;
+    justify-content: space-around;
+}
+
+.menu-item {
+    width: 30%;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+}
+
+.menu-item h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* Reservation Section */
+.reservation {
+    padding: 60px 0;
+    background-color: #FF7043;
+    color: white;
+    text-align: center;
+}
+
+.reservation h2 {
+    font-size: 36px;
+}
+
+.reservation p {
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+.reservation .btn {
+    padding: 10px 20px;
+    background-color: white;
+    color: #FF7043;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+/* Contact Section */
+.contact {
+    padding: 60px 0;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.contact h2 {
+    font-size: 36px;
+}
+
+.contact p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 20px;
+}

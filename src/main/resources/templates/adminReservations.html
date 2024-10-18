@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Css/index.css" type="text/css"/>
+    <link rel="stylesheet" href="/Css/addTable.css" type="text/css">
+    <!--bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!--lineicons CDN-->
+    <link rel="stylesheet" href="https://cdn.lineicons.com/4.0/lineicons.css" />
+
+    <!--Fredoka font family-->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/fredoka-one" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/fredoka-one?styles=18586" rel="stylesheet">
+
+    <!--search icon-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <!--notification icon-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <!--mail icon -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <!--alert icon-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <!--dashboard icon-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <!--menu book icon-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <!--table icon-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+<body>
+    <div class="d-flex">
+        <!--sidebar start-->
+        <div th:insert="sidebar"></div>
+        <!--sidebar end -->
+
+        <!--main content -->
+        <div id="content" class="d-flex flex-column">
+            <!--navbar start -->
+             <nav class="navbar navbar-expand bg-white shadow px-3" th:insert="navbar"> </nav>
+            <!--navbar end-->
+            <!--main body start-->
+            <main class="p-2">
+                    <div class="container-fluid dashboard-item-container px-3">
+                        <div class="mt-3 mb-5 font-monospace">    
+                            <h2 class="dashboard-heading">Add Items</h2>
+                        </div>
+                        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Reservation ID</th>
+                    <th>Customer Name</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Table Number</th>
+                    <th>Party Size</th>
+                    <th>Special Request</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Loop through each reservation and display its details -->
+                <tr th:each="reservation : ${allReservations}">
+                    <td th:text="${reservation.id}"></td>
+                    <td th:text="${reservation.userId.username}"></td>
+                    <td th:text="${reservation.date}"></td>
+                    <td th:text="${reservation.time}"></td>
+                    <td th:text="${reservation.tableId.tableNo}"></td>
+                    <td th:text="${reservation.partySize}"></td>
+                    <td th:text="${reservation.specialRequest}"></td>
+                    <td ><p th:text="${reservation.staus}" style="background-color: green; color: white; font-size: 12px; padding: 4px;"></p></td>
+                </tr>
+            </tbody>
+        </table>
+                        
+                    </div>
+            </main>
+        
+        <!-- end of content div-->    
+        </div>
+
+    <!--end of body div-->    
+    </div>
+
+    
+    <!--Bootstrap-->
+    <script src="/js/addItem.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="/js/index.js"></script> 
+</body>
+</html>

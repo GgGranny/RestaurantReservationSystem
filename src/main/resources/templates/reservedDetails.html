@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation Successful</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Roboto', sans-serif;
+        }
+        .reservation-details-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        .success-message {
+            font-size: 2rem;
+            color: #28a745;
+            font-weight: bold;
+            margin-bottom: 30px;
+            display: inline-block;
+            padding: 10px;
+            background-color: rgba(40, 167, 69, 0.1);
+            border-radius: 10px;
+        }
+        .list-group-item {
+            background-color: transparent;
+            border: none;
+            font-size: 1.2rem;
+            padding: 15px 0;
+            color: #333;
+        }
+        .list-group-item strong {
+            color: #495057;
+        }
+        .back-button {
+            margin-top: 30px;
+            background-color: #007bff;
+            color: white;
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+        .icon-checkmark {
+            font-size: 3rem;
+            color: #28a745;
+            margin-bottom: 20px;
+            animation: popIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes popIn {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="reservation-details-container">
+        <div class="icon-checkmark">✔️</div>
+        <div class="success-message">
+            Reservation Successful!
+        </div>
+        <p>Thank you for your reservation. Here are the details:</p>
+
+        <ul class="list-group text-start">
+            <li class="list-group-item"><strong>Reservation Date:</strong> <span id="reservationDate" th:text="${latestReservation.date}">22/09/2024</span></li>
+            <li class="list-group-item"><strong>Reservation Time:</strong> <span id="reservationTime" th:text="${latestReservation.time}">07:00 PM</span></li>
+            <li class="list-group-item"><strong>Table No:</strong> <span id="tableNo" th:text="${latestReservation.tableId.tableNo}">A1</span></li>
+            <li class="list-group-item"><strong>Name:</strong> <span id="name" th:text="${latestReservation.userId.username}">User2</span></li>
+            <li class="list-group-item"><strong>Special Request:</strong> <span id="specialRequest" th:text="${latestReservation.specialRequest}">Any special request?</span></li>
+            <li class="list-group-item"><strong>Party Size:</strong> <span id="partySize" th:text="${latestReservation.tableId.noOfPeople}">4</span></li>
+        </ul>
+
+        <a href="/user/home" class="btn back-button">Back to Reservation</a>
+    </div>
+</div>
+
+</body>
+</html>

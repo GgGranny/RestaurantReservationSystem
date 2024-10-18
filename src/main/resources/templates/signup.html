@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Multi-Step SignUp</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Css/Signup.css"/> 
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Poppins&display=swap" rel="stylesheet">
+    <style>
+        .form-step { display: none; }
+        .form-step.active { display: block; }
+        
+        /* General Styling */
+.role-heading {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #333;
+}
+
+.role-btn {
+    background-color: #f8f9fa;
+    border: 2px solid #dee2e6;
+    border-radius: 10px;
+    width: 45%;
+    text-align: center;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.role-btn i {
+    font-size: 22px;
+}
+
+.role-btn:hover {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+}
+
+.role-btn:active {
+    background-color: #ced4da;
+    border-color: #adb5bd;
+}
+
+.choice-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.choice-btn:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .role-btn {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .btn-container {
+        flex-direction: column;
+    }
+}
+        
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div style="max-width: 400px; margin: 50px auto;" class="shadow rounded p-4">
+            <form id="multiStepForm" th:action="@{/signUpProcess}" method="post" enctype="multipart/form-data">
+            
+                <!-- Step 1: Username, Email, Password -->
+                <div class="form-step active" id="step1">
+                    <div class="text-center mb-5">
+                        <img width="100px" src="images/png/logo-no-background.png" alt="">
+                        <h2>Sign Up</h2>
+                    </div>
+                    <p id="step1Error" class="text-danger"></p>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                        <p th:text="${usernameError}"></p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                    </div>
+                    
+                    <button type="button" class="btn btn-dark w-100" onclick="validateStep1()">Sign up</button>
+                </div>
+
+                <!-- Step 2: Role Selection -->
+                <div class="form-step" id="step2">
+				    <div class="text-center mb-5">
+				        <h2 class="role-heading">Choose A Role</h2>
+				    </div>
+				    
+				    <div class="btn-container mb-5 d-flex justify-content-around">
+				        <a href="javascript:void(0);" 
+				           class="choice-btn admin-btn shadow text-dark role-btn p-3" 
+				           onclick="selectRole('admin')">
+				            <i class="fas fa-user-shield me-3"></i> 
+				            <span>Admin</span>
+				        </a>
+				        
+				        <a href="javascript:void(0);" 
+				           class="choice-btn user-btn shadow text-dark role-btn p-3" 
+				           onclick="selectRole('user')">
+				            <i class="fas fa-user me-3"></i> 
+				            <span>User</span>
+				        </a>
+				        
+				        <input type="hidden" value="" name="role" id="role">
+				    </div>
+				    
+				    <div id="step2Error" class="text-danger text-center mb-3"></div>
+				    
+				    <div class="d-flex justify-content-between">
+				        <button type="button" class="btn btn-secondary w-25" onclick="prevStep(1)">Back</button>
+				        <button type="button" class="btn btn-primary w-25" onclick="validateStep2()">Next</button>
+				    </div>
+				</div>
+
+
+                <!-- Step 3: Admin Restaurant Details -->
+                <div class="form-step" id="step3">
+                    <h2 class="text-center">Restaurant Information</h2>
+                    <div id="adminDetails" style="display:none;">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="restaurantName" class="form-label">Restaurant Name</label>
+                                <input type="text" class="form-control" id="restaurantName" name="restaurantName" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter phone number" pattern="[0-9]{10}" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="restaurantImage" class="form-label">Restaurant Image</label>
+                                <input type="file" class="form-control" id="restaurantImage" name="restaurantImage" accept="image/*" required>
+                                <img id="imagePreview" class="mt-2" src="" width="100px" alt="">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="location" class="form-label">Location</label>
+                                <input type="text" class="form-control" id="location" name="location" required>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-secondary" onclick="prevStep(2)">Back</button>
+                    <button type="submit" class="btn btn-success w-100">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+    let currentStep = 1;
+    let selectedRole = null;
+    
+    const userRole = document.getElementById('role');
+
+    // Function to move to the next step after validation
+    function nextStep(step) {
+        document.querySelector(`#step${currentStep}`).classList.remove('active');
+        currentStep = step;
+        document.querySelector(`#step${currentStep}`).classList.add('active');
+
+        if (currentStep === 3 && selectedRole === 'user') {
+            userRole.value = selectedRole;
+            document.querySelector('form').submit();  // Skip details for user role
+        } else if (currentStep === 3 && selectedRole === 'admin') {
+            userRole.value = selectedRole;
+            document.getElementById('adminDetails').style.display = 'block';  // Show admin details
+        }
+    }
+
+    // Function to move back a step
+    function prevStep(step) {
+        document.querySelector(`#step${currentStep}`).classList.remove('active');
+        currentStep = step;
+        document.querySelector(`#step${currentStep}`).classList.add('active');
+    }
+
+    // Function to select a role (Admin or User)
+    function selectRole(role) {
+        selectedRole = role;
+    }
+
+    // Validate Step 1: Username, Email, Password, Confirm Password
+    function validateStep1() {
+        const username = document.getElementById("username").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+        let errorMessage = '';
+
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        // Password validation regex (min 8 chars, at least 1 uppercase, 1 lowercase, 1 number, and 1 special character)
+        const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+
+        // Validation for empty fields
+        if (!username || !email || !password || !confirmPassword) {
+            errorMessage = 'All fields are required.';
+        } 
+        // Email format validation
+        else if (!emailPattern.test(email)) {
+            errorMessage = 'Please enter a valid email address.';
+        }
+        // Password format validation
+        else if (!passwordPattern.test(password)) {
+            errorMessage = 'Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character.';
+        }
+        // Password match validation
+        else if (password !== confirmPassword) {
+            errorMessage = 'Passwords do not match.';
+        }
+
+        // Display error message if any, or proceed to next step
+        if (errorMessage) {
+            document.getElementById('step1Error').innerText = errorMessage;
+        } else {
+            document.getElementById('step1Error').innerText = '';
+            nextStep(2);  // Move to the next step
+        }
+    }
+
+    // Validate Step 2: Role selection
+    function validateStep2() {
+        if (!selectedRole) {
+            document.getElementById('step2Error').innerText = 'Please select a role.';
+        } else {
+            document.getElementById('step2Error').innerText = '';
+            nextStep(3);  // Move to the next step
+        }
+    }
+
+    // Additional validation for Step 3 (Admin role with restaurant details)
+    function validateStep3() {
+        const restaurantName = document.getElementById("restaurantName").value;
+        const phone = document.getElementById("phone").value;
+        const location = document.getElementById("location").value;
+        const restaurantImage = document.getElementById("restaurantImage").files[0];
+        let errorMessage = '';
+
+        // Ensure fields are filled for Admin role
+        if (selectedRole === 'admin') {
+            if (!restaurantName || !phone || !location || !restaurantImage) {
+                errorMessage = 'All restaurant details are required for Admin role.';
+            } else if (!/^\d{10}$/.test(phone)) {
+                errorMessage = 'Enter a valid 10-digit phone number.';
+            }
+        }
+
+        // Display error or submit the form
+        if (errorMessage) {
+            document.getElementById('step3Error').innerText = errorMessage;
+        } else {
+            document.getElementById('step3Error').innerText = '';
+            document.querySelector('form').submit();  // Submit the form
+        }
+    }
+
+    // Preview Image for Restaurant in Step 3
+    const imageData = document.querySelector("#restaurantImage");
+    const preview = document.querySelector("#imagePreview");
+    imageData.onchange = () => {
+        const [file] = imageData.files;
+        if (file) preview.src = URL.createObjectURL(file);
+    };
+
+
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

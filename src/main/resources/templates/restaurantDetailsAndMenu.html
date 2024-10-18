@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burger Shack - Restaurant</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Hero Section */
+      .hero {
+    color: white;
+    text-align: center;
+    padding: 100px 0;
+}
+
+.containerHero {
+    width: 100%;
+    height: 500px;
+    position: relative; /* To position child elements */
+}
+
+.imageContainer {
+    height: 100%;
+    width: 100%;
+    overflow: hidden; /* To ensure no overflow */
+}
+
+.imageContainer img {
+    width: 100%; /* Ensure it takes full width */
+    height: 100%; /* Ensure it takes full height */
+    object-fit: cover; /* Cover the area while maintaining aspect ratio */
+}
+
+.textContainer {
+    position: absolute; /* Positioning for centering text */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust to center */
+}
+
+        .hero .btn-reservation {
+            margin-top: 20px;
+            background-color: #ff5a5f;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+        }
+
+        .hero .btn-reservation:hover {
+            background-color: #ff3a3f;
+            color: white;
+        }
+
+        /* Restaurant Details Section */
+        .restaurant-details {
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        /* Menu Section */
+        .menu-section {
+            padding: 50px 0;
+        }
+
+        /* Menu Category Filter */
+        .menu-categories {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .menu-categories button {
+            background-color: #ff5a5f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-categories button:hover {
+            background-color: #ff3a3f;
+        }
+
+        /* Menu Items */
+        .menu-item {
+            margin-bottom: 20px;
+            text-align: center;
+            display: block; /* Hide initially, will be shown by category */
+        }
+
+        .menu-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-top: 15px;
+            color: #333;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* Reservation Button at Bottom */
+        .btn-reservation-bottom {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        .btn-reservation-bottom .btn-reservation {
+            background-color: #ff5a5f;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+        }
+
+        .btn-reservation-bottom .btn-reservation:hover {
+            background-color: #ff3a3f;
+        }
+        
+    </style>
+</head>
+<body>
+	<div th:insert="userNavbar"></div>
+    <!-- Hero Section -->
+    <div class="hero">
+	    <div class="containerHero">
+	        <div class="imageContainer">
+	            <img alt="Hero Image" th:src="'data:image/png;base64,' + ${rsDetails.restaurantImage}">
+	        </div>
+	        <div class="textContainer">
+	            <h1 class="display-4" th:text="${rsDetails.restaurantName}"></h1>
+	            <p class="lead">Best burgers in town</p>
+	            <a th:href="@{/user/restaurant/{id}(id=${rsDetails.id})}" class="btn btn-reservation">Make a Reservation</a>
+	        </div>
+	    </div>
+	</div>
+
+
+    <!-- Restaurant Details Section -->
+    <div class="container restaurant-details">
+        <h2>About Us</h2>
+        <p>Located in Kamaladi, Kathmandu, we serve delicious gourmet burgers with fresh ingredients.</p>
+        <h4 th:text="${rsDetails.location}">Location: Kamaladi, Kathmandu</h4>
+        <h4 th:text="'Contact: ' + ${rsDetails.phoneNo}">Contact: +977-1-5551234</h4>
+    </div>
+
+    <!-- Menu Section -->
+    <div class="container menu-section">
+        <h2 class="text-center">Our Menu</h2>
+
+        <!-- Menu Categories -->
+        <div class="menu-categories">
+            <button onclick="filterMenu('all')">All</button>
+            <button onclick="filterMenu('Fast Food')">Fast Food</button>
+            <button onclick="filterMenu('Veg')">Veg</button>
+            <button onclick="filterMenu('non-veg')">non-veg</button>
+            <button onclick="filterMenu('drinks')">Drinks</button>
+        </div>
+
+        <!-- Menu Items -->
+        <div class="row">
+		    <div class="col-md-4 menu-item" th:each="item : ${allItems}" th:data-category="${item.catagory}">
+		        <img th:src="'data:image/png;base64,' + ${item.itemImage}" alt="Menu Item">
+		        <h3 th:text="${item.name}"></h3>
+		        <p th:text="${item.description}"></p>
+		         <p><strong>Price:</strong> <span th:text="${item.itemPrice}"></span></p>
+		    </div>
+		</div>
+    </div>
+
+    <!-- Reservation Button at Bottom -->
+    <div id="reservation" class="btn-reservation-bottom">
+    	<p th:text="${rsDetails.id}"></p>
+        <a th:href="@{/user/restaurant/{id}(id=${rsDetails.id})}" class="btn btn-reservation">Make a Reservation</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    
+    window.onload = function() {
+        filterMenu('all'); // Show all items initially
+    };
+    function filterMenu(category) {
+        const menuItems = document.querySelectorAll('.menu-item');
+
+        menuItems.forEach(item => {
+            const itemCategory = item.getAttribute('data-category');
+
+            // Show all items or only those that match the selected category
+            if (category === 'all' || itemCategory === category) {
+                item.style.display = 'block'; // Show the item
+            } else {
+                item.style.display = 'none'; // Hide the item
+            }
+        });
+    }
+    </script>
+</body>
+</html>

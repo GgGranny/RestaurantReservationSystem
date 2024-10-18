@@ -1,0 +1,41 @@
+:root {
+    --yellow: #FFC604;
+    --white: #FFFFFF;
+    --black: #3D3839;
+    --black2: #0B060A;
+    --yellow2: #CEA702;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Fredoka', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+}
+
+.login-btn {
+    background-color: var(--yellow) !important;
+    border: 2px solid var(--yellow) !important;
+    font-weight: 500 !important;
+    letter-spacing: 1px !important;
+}
+.login-btn {
+	background-color: var(--black2) !important;
+	color: white !important;
+}
+.login-btn:hover {
+    background-color: #FFFFFF !important;
+    color: var(--black) !important;
+}
+
+label,
+a {
+    font-size: 12px;
+}
+
+option {
+    font-size: 12px;
+}
+
+select:focus {
+    font-size: 14px !important;
+}

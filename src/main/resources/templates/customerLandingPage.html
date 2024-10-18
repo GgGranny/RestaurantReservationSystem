@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Reservation System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+}
+
+.container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Navigation Bar */
+nav {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+}
+
+nav .logo {
+    float: left;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+nav .nav-links {
+    float: right;
+    list-style-type: none;
+}
+
+nav .nav-links li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+nav::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+/* Hero Section */
+.containerHero {
+    position: relative;
+    height: 500px; /* Adjust this height as needed */
+    width: 100%;
+    overflow: hidden;
+}
+
+.heroBgImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: flex-end; /* To align image to the bottom */
+}
+
+.heroBgImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the entire section */
+    object-position: center; /* Align the image content to the bottom */
+}
+
+.hero h2 {
+    font-size: 48px;
+    font-weight: 600;
+}
+
+.hero p {
+    font-size: 20px;
+    margin: 20px 0;
+}
+
+.hero .btn {
+    padding: 10px 20px;
+    background-color: #FF7043;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+/* About Us Section */
+.about {
+    padding: 60px 0;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.about h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.about p {
+    font-size: 18px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Menu Section */
+.menu {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.menu h2 {
+    font-size: 36px;
+    margin-bottom: 40px;
+}
+
+.containerMenu  {
+width:100%;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+    gap: 20px;
+    justify-content: space-around;
+}
+
+/* Make sure .menu-item is visible */
+.menu-item {
+    margin-bottom: 20px;
+    text-align: center;
+    display: block; /* Changed from none to block */
+}
+
+/* Ensure images are visible and properly sized */
+.menu-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.menu-item h3 {
+    font-size: 1.5rem;
+    margin-top: 15px;
+    color: #333;
+}
+
+
+.search {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.search h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.search-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    width: 100%;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.3); /* Semi-transparent background */
+    backdrop-filter: blur(10px); /* Blur effect */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Optional: to add depth */
+}
+
+.search-container input {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Reservation Section */
+.reservation {
+    padding: 60px 0;
+    background-color: #FF7043;
+    color: white;
+    text-align: center;
+}
+
+.reservation h2 {
+    font-size: 36px;
+}
+
+.reservation p {
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+.reservation .btn {
+    padding: 10px 20px;
+    background-color: white;
+    color: #FF7043;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+/* Contact Section */
+.contact {
+    padding: 60px 0;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.contact h2 {
+    font-size: 36px;
+}
+
+.contact p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 20px;
+}
+
+
+
+
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="container" th:insert="userNavbar">
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <!-- Search Section -->
+    <section id="search" class="search">
+        <div class="containerHero">
+            <div class="heroBgImage"><img src="/images/waiter.jpg" alt=""></div>
+            <div class="search-container">
+                <h2>Search for a Restaurant</h2>
+                <p>Find your favorite restaurants and make a reservation!</p>
+                <form id="searchForm" method="post" action="/user/getRestaurant">
+	                <input type="text" id="restaurantSearch" placeholder="Search for restaurants..." onkeyup="searchRestaurants()"  name="searchValue">
+                </form>
+                <div id="searchResults" class="dropdown">
+                	
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>At Restaurant XYZ, we offer a unique dining experience with a wide range of exquisite dishes that cater to all tastes. Our chefs are passionate about delivering the best flavors, and our staff ensures you have an unforgettable visit.</p>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu">
+    <div class="containerMenu">
+        <h2>Our Menu</h2>
+        <div class="menu-grid">
+            <!-- Check if items list is not empty -->
+                <!-- Loop through each item -->
+                
+	                <div class="menu-item" th:if="${items != null}" th:each="item : ${items}">
+	                    <!-- Display image -->
+	                    <a th:href="@{/restaurantDetails/{id}(id=${item.resDetails.getId()})}">
+							   <img th:src="'data:image/png;base64,' + ${item.itemImage}" alt="Menu Image" class="menuImage">
+						</a>
+	                    <!-- Display item name -->
+	                    <h3 th:text="${item.name}">Item Name</h3>
+	                    <!-- Display item price -->
+	                </div>
+            <!-- Message if no items found -->
+            <div th:if="${items == null || items.isEmpty()}">
+                <p>No items available.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Reservation Section -->
+    <section id="reservation" class="reservation">
+        <div class="container">
+            <h2>Make a Reservation</h2>
+            <p>Select a date, time, and table to reserve your spot at our restaurant.</p>
+            <a href="/user/reservation" class="btn">Reserve Now</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p>Have any questions? Reach out to us and we’ll be happy to assist you.</p>
+            <p>Email: contact@restaurantxyz.com | Phone: (123) 456-7890</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Restaurant XYZ. All rights reserved.</p>
+        </div>
+    </footer>
+    
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/js/customerLandgingPage.js"></script>
+</body>
+</html>

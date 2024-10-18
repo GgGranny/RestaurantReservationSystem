@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- linking css file -->
+    <link rel="stylesheet" href="/Css/LandingPage.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/fredoka-one" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/fredoka-one?styles=18586" rel="stylesheet">
+</head>
+<body class="pt-5 m-0">
+    <!--Navigation Bar Start-->
+   	<div th:insert="userNavbar"></div>
+
+    <!--Hero Section -->
+    <div class="container-fluid hero-section mt-3 p-0">
+        <div class="hero-section-container row  g-0">
+            <div class="hero-left-side col-md-6  d-flex justify-content-center align-items-center">
+                <div class="hero-content-container w-100">
+                    <div class="h1-paragraph"><p>The Perfect Space to Enjoy Fantastic Food </p></div>
+                    <div class="hero-paragraph"><p>Festive dining at Farthings where we are strong believers in
+                        using the very best produce</p></div>
+                    <div class="mt-5">
+                        <form action="" class="input-group" id="search-field">
+                            <input type="text" placeholder="search Restaurant" class=""/> 
+                            <i class="lni lni-search-alt"></i>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-right-side col-md-6 hero-container ">
+                <img class="hero-image" src="/images/gourmet-italian-bolognese-pasta-with-fresh-parmesan-generated-by-ai.jpg" alt="">
+            </div>
+        </div>
+    </div>
+
+
+    <!--Discover Restaurant Section-->
+    <div  class="text-center mt-5 d-flex justify-content-center align-items-center">
+        <div class="dicover-text">
+            <h1>Discover Restaurants</h1>
+        </div>
+    </div>
+    <div class="container px-5 mt-3">
+        <div class="restaurants-container row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+            <div class="card col me-3 mt-3" style="width: 20rem;" th:each="rs : ${restaurantsData}">
+                <img th:src="'data:image/png;base64,'+${rs.restaurantImage}" class="card-img-top" alt="..." style="height: 100px; object-fit: cover; position: center;">
+                <div class="card-body px-1">
+                    <div class="restaurant-info-container">
+                        <h5 class="restaurant-name card-title d-inline align-top" th:text="${rs.restaurantName}">Always Eat</h5>
+                        <a href="#" class="btn btn-primary reserve-btn">Go somewhere</a>
+                        <p class="restaurant-description card-text" th:text="${rs.location}">lalitpur. Nepal</p>
+                    </div>
+                </div>
+                <div class="container restaurant-ratings d-flex mb-2 gx-2" >
+                    <svg height="20px" width="20px" class="me-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#FFC604" d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/></svg>
+                    <svg height="20px" width="20px" class="me-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#FFC604" d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/></svg>
+                    <svg height="20px" width="20px" class="me-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#FFC604" d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/></svg>
+                    <svg height="20px" width="20px" class="me-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#FFC604" d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/></svg>
+                    <svg height="20px" width="20px" class="me-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#FFC604" d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/></svg>
+                </div>
+            </div>
+         </div>
+    </div>
+
+    <!--cutomer feedback section-->
+    <div class="about-section-container container ">
+        <div class="about-section-headings row">
+            <div class="col">
+                <p class="about-dineease-text">Testimonials & Reviews</p>
+                <p class="about-h1-text">Our Customers Feedbacks </p>
+            </div>
+            <div class="col d-inline-block"></div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="feedback-container">
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus saepe voluptatum doloremque reprehenderit, mollitia cumque atque incidunt omnis! Molestias similique doloremque earum repellat fugit harum architecto cum natus dignissimos possimus.</p>
+                    <div class="customer-name">
+                        <p>Abhisek Rai</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col image-container">
+                <div class="image-grid">
+                    <div class="image-wrapper yellow-overlay">
+                        <img src="/images/Restaurant.png" alt="Bread">
+                    </div>
+                    <div class="image-wrapper">
+                        <img src="/images/dining.jpg" alt="Coffee">
+                    </div>
+                    <div class="image-wrapper">
+                        <img src="/images/gourmet-italian-bolognese-pasta-with-fresh-parmesan-generated-by-ai.jpg" alt="Dessert">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--footer section -->
+    <div class="footer-container bg-light ">
+        <div class="row container row-cols-md-4 row-cols-1 row-cols-sm-2">
+            <div class="col link-container">
+                <h1>DineEase</h1>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Available Areas</a></li>
+                    <li><a href="#">Socials</a></li>
+                </ul>
+            </div>
+            <div class="col link-container">
+                <h1>Get Help</h1>
+                <ul>
+                    <li><a href="#">How to Register</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div> 
+            <div class="col link-container">
+                <h1>Call  Us</h1>
+                <ul>
+                    <li><a href="#">How to Register ?</a></li>
+                    <p>9992787871, 982781722</p>
+
+                </ul>
+            </div>
+            <div class="col link-container">
+                <h1>Connect With Us</h1>
+                <ul class="icon-container d-flex justify-content-start">
+                    <li class="me-2 icon"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8A4 4 0 0 1 16 11.37m1.5-4.87h.01"/></g></svg></a></li>
+                    <li class="me-2 icon"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 16 16"><path fill="currentColor" d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104l.022.26l.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105l-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006l-.087-.004l-.171-.007l-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103l.003-.052l.008-.104l.022-.26l.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007l.172-.006l.086-.003l.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"/></svg></a></li>
+                    <li class="me-2 icon"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.04c-5.5 0-10 4.49-10 10.02c0 5 3.66 9.15 8.44 9.9v-7H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.89 3.78-3.89c1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.9h-2.33v7a10 10 0 0 0 8.44-9.9c0-5.53-4.5-10.02-10-10.02"/></svg></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--Bootstrap-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
+</html>

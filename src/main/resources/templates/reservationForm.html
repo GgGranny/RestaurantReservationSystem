@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+        }
+        .container {
+            width: 350px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        input[type="text"],
+        input[type="date"],
+        input[type="time"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            outline: none;
+            transition: border 0.3s;
+        }
+        input[type="text"]:focus,
+        input[type="date"]:focus,
+        input[type="time"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #ff5b5b;
+        }
+        textarea {
+            resize: none;
+            height: 80px;
+        }
+        .form-group select {
+            cursor: pointer;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff5b5b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #ff4b4b;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Reservation Form</h2>
+    
+    <form action="saveReservation" method="post">
+        <!-- Date -->
+        <div class="form-group">
+            <label for="date">Reservation Date</label>
+            <input type="text" id="date" name="date" required th:value="${date}" readonly>
+        </div>
+        
+        <!-- Time -->
+        <div class="form-group">
+            <label for="time">Reservation Time</label>
+            <input type="text" id="time" name="time" required th:value="${time}" readonly>
+        </div>
+
+        <!-- Table ID -->
+        <div class="form-group">
+            <label for="tableId">Table No</label>
+            <input type="text" id="tableId" name="tableNo" placeholder="Enter Table ID" required th:value="${tableNo}" readonly>
+        </div>
+
+        <!-- User ID -->
+        <div class="form-group">
+            <label for="userId">Name</label>
+            <input type="text" id="userId" name="username" placeholder="name" required th:value="${username}" readonly>
+        </div>
+
+        <!-- Special Request -->
+        <div class="form-group">
+            <label for="specialRequest">Special Request</label>
+            <textarea id="specialRequest" name="specialRequest" placeholder="Any special request?"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="partySize">party size: </label>
+            <input type="text" id="partySize" name="partySize" placeholder="party Size" th:value="${partySize}" readonly>
+        </div>
+		<input type="hidden" th:value="${tableId}" name="tableId">
+        <!-- Status -->
+
+        <!-- Submit Button -->
+        <button type="submit">Submit Reservation</button>
+    </form>
+</div>
+
+</body>
+</html>

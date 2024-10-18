@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            display: inline-block;
+            
+        }
+        .text {
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 4s steps(40, end) infinite;
+            border-right: 2px solid orange; 
+        }
+        @keyframes typing {
+            from {
+                width: 0%;
+            }to {
+                width: 100%;
+            }
+        }
+
+        
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p class="text">hello there this is text animation</p>
+    </div>
+</body>
+</html>

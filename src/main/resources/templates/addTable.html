@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Css/index.css" type="text/css"/>
+    <link rel="stylesheet" href="Css/addTable.css" type="text/css">
+    <!--bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!--lineicons CDN-->
+    <link rel="stylesheet" href="https://cdn.lineicons.com/4.0/lineicons.css" />
+
+    <!--Fredoka font family-->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/fredoka-one" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/fredoka-one?styles=18586" rel="stylesheet">
+
+    <!--search icon-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <!--notification icon-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <!--mail icon -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <!--alert icon-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <!--dashboard icon-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <!--menu book icon-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <!--table icon-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+<body>
+    <div class="d-flex">
+        <!--sidebar start-->
+        <div th:insert="sidebar"></div>
+        <!--sidebar end -->
+
+        <!--main content -->
+        <div id="content" class="d-flex flex-column">
+            <!--navbar start -->
+            <nav class="navbar navbar-expand bg-white shadow px-3" th:insert="navbar"> </nav>
+            <!--navbar end-->
+            <!--main body start-->
+            <main class="p-2">
+                    <div class="container-fluid dashboard-item-container px-3">
+                        <div class="mt-3 mb-5 font-monospace">    
+                            <h2 class="dashboard-heading">Add Table</h2>
+                        </div>
+                        <!--reservation container-->
+                        <div class="flex justify-content-center align-items-center">
+                            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M253.8 30.44c-9.5 1.2-18.1 12.3-18.1 26.8c0 8 2.7 15 6.7 19.9l4.9 5.8l-7.5 1.4c-5.2 1-9 3.8-12.3 8.3c-3.4 4.6-5.9 10.76-7.6 18.06c-3.2 13.1-3.9 29.1-4 43.3h17.5l1.6 21.9c6.8-.3 13.8-.5 20.9-.5q11.25 0 21.9.6l1.5-22h16.6c0-14.3-.2-30.6-3.1-43.9c-1.6-7.2-4-13.46-7.3-17.96s-7.4-7.2-13.3-8.1l-7.6-1.2l4.8-6c3.9-4.8 6.5-11.8 6.5-19.6c0-15.4-9.6-26.8-20.1-26.8zM61.9 174.4c-9.5 1.2-18.1 12.3-18.1 26.8c0 8 2.7 15 6.7 19.9l4.9 5.8l-7.5 1.4c-5.2 1-9 3.8-12.3 8.3c-3.4 4.6-5.9 10.8-7.6 18.1c-3.2 13.1-3.9 29.1-4 43.3h17.5l4.7 64.3c12.2 2.8 25.2 2.6 36.94 0l4.3-64.3H104c0-14.3-.2-30.6-3.1-43.9c-1.57-7.2-3.97-13.5-7.27-18c-3.29-4.5-7.39-7.2-13.29-8.1l-7.64-1.2l4.8-6c3.94-4.8 6.54-11.8 6.54-19.6c0-15.4-9.64-26.8-20.14-26.8zm384 0c-9.5 1.2-18.1 12.3-18.1 26.8c0 8 2.7 15 6.7 19.9l4.9 5.8l-7.5 1.4c-5.2 1-9 3.8-12.3 8.3c-3.4 4.6-5.9 10.8-7.6 18.1c-3.2 13.1-3.9 29.1-4 43.3h17.5l4.7 64.3c12.2 2.8 25.2 2.6 36.9 0l4.3-64.3H488c0-14.3-.2-30.6-3.1-43.9c-1.6-7.2-4-13.5-7.3-18s-7.4-7.2-13.3-8.1l-7.6-1.2l4.8-6c3.9-4.8 6.5-11.8 6.5-19.6c0-15.4-9.6-26.8-20.1-26.8zm-190 19c-36.7 0-69.9 5.3-93.2 13.5c-11.6 4.1-20.7 9-26.3 13.7c-5.7 4.7-7.5 8.6-7.5 11.8s1.8 7.1 7.5 11.8c5.6 4.7 14.7 9.5 26.3 13.7c23.3 8.2 56.5 13.5 93.2 13.5s69.9-5.3 93.2-13.5c11.6-4.2 20.7-9 26.3-13.7c5.7-4.7 7.5-8.6 7.5-11.8s-1.8-7.1-7.5-11.8c-5.6-4.7-14.7-9.6-26.3-13.7c-23.3-8.2-56.5-13.5-93.2-13.5m-105 79.2v45.8h18v-39.8c-4.2-1.2-8.3-2.4-12.2-3.8c-2-.7-3.9-1.4-5.8-2.2m210 0c-1.9.8-3.8 1.5-5.8 2.2c-3.9 1.4-8 2.6-12.2 3.8v39.8h18zm-107.1 19c-9.5 1.2-18.1 12.3-18.1 26.8c0 8 2.7 15 6.7 19.9l4.9 5.8l-7.5 1.4c-5.2 1-9 3.8-12.3 8.3c-3.4 4.6-5.9 10.8-7.6 18.1c-3.2 13.1-3.9 29.1-4 43.3h17.5l4.7 64.3c12.2 2.8 25.2 2.6 36.9 0l4.3-64.3h16.6c0-14.3-.2-30.6-3.1-43.9c-1.6-7.2-4-13.5-7.3-18s-7.4-7.2-13.3-8.1l-7.6-1.2l4.8-6c3.9-4.8 6.5-11.8 6.5-19.6c0-15.4-9.6-26.8-20.1-26.8z"/></svg> -->
+                                <form action="addTable" method="post" class="fs-6 text-secondary border p-5 rounded shadow">
+                                <p th:text="${tableErrorMsg}" style="color: red;"></p>
+                                <p th:text="${tableSuccessMsg}" style="color: green;"></p>
+                                    <div class="mb-3">
+                                    <label for="tableNo" class="form-label">Table no</label>
+                                    <input type="text" class="form-control" id="tableNo" aria-describedby="tableNo" required name="tableNo">
+                                    </div>
+                                    <div class="mb-3">
+                                    <label for="tableLocation" class="form-label">Location</label>
+                                    <input type="text" class="form-control" id="tableLocation" required name="tableLocation">
+                                    </div>
+                                    <div class="mb-3">
+                                    <label for="noOfPeople" class="form-label">no of people</label>
+                                    <input type="text" class="form-control" id="noOfPeople" required name="noOfPeople">
+                                    </div>
+                                    <div class="mb-3 text-end">
+                                        <button type="submit" class="btn btn-secondary">Add</button>
+                                    </div>
+                                </form>
+                        </div>
+                    </div>
+            </main>
+        
+        <!-- end of content div-->    
+        </div>
+
+    <!--end of body div-->    
+    </div>
+
+    
+    <!--Bootstrap-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>

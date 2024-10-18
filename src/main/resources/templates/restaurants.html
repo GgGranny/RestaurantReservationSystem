@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Listings</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .restaurant-card {
+            margin: 15px 0;
+        }
+        .restaurant-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .restaurant-info {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        
+     
+    </style>
+</head>
+<body>
+	<div th:insert="userNavbar"></div>
+    <div class="container">
+        
+        <!-- Restaurant List -->
+        <div class="row" >
+        <p style="margin-top: 100px;" class="fw-bold font-monospace"> Restaurants Listing</p>
+            <!-- Example Restaurant Card -->
+            <div class="col-md-4" th:each="res : ${restaurnats}">
+                <div class="card restaurant-card">
+                    <div class="card-body">
+                        <h5 class="restaurant-name" th:text="${res.restaurantName}">The Great Bistro</h5>
+                        <p class="restaurant-info">Cuisine: Italian</p>
+                        <p class="restaurant-info" th:text="'location:' +  ${res.location}">Location: 123 Main St, City</p>
+                        <a th:href="@{/restaurantDetails/{id}(id=${res.id})}" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            
+    </div>
+    </div>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

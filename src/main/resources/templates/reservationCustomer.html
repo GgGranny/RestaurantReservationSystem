@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant Reservation</title>
+  <link rel="stylesheet" href="/Css/reservation.css">
+  	<style>
+  		.back-btn {
+  			padding: 8px 16px;
+  			background-color: black ;
+  			color: white;
+  			text-decoration: none;
+  			border-radius: 4px;
+  		}
+  	</style>
+</head>
+<body>
+  <div class="containerC">
+  	<a href="/user/home" type="button" class="back-btn">back</a>
+    <div class="table-layout">
+        	<h5 style="margin-bottom: 50px !important; margin-top: 50px;">Tables</h5>
+        <div class="table-icon-container" >
+            <div class="table"  th:each="table : ${tables}">
+            <input type="hidden" name="tableId" id="tableId" th:value="${table.id}">
+              <div class="chair right"></div>
+              <div class="chair top"></div>
+              <div class="chair bottom"></div>
+              <div class="chair left"></div>
+              <div class="table-label" th:text="${table.tableNo}" id="tableNo"> <span th:text="${table.noOfPeople}"></span></div>
+            </div>
+          
+            <!-- <div class="table" id="table-square">
+              <div class="chair top"></div>
+              <div class="chair right"></div>
+              <div class="chair bottom"></div>
+              <div class="chair left"></div>
+              <div class="table-label">T2</div>
+            </div>
+          
+            <div class="table" id="table-rectangular">
+              <div class="chair top"></div>
+              <div class="chair right"></div>
+              <div class="chair bottom"></div>
+              <div class="chair left"></div>
+              <div class="table-label">T3</div>
+            </div>
+            <div class="table" id="table-rectangular">
+              <div class="chair top"></div>
+              <div class="chair right"></div>
+              <div class="chair bottom"></div>
+              <div class="chair left"></div>
+              <div class="table-label">T3</div>
+            </div>
+          </div> -->
+          
+      <!-- <div class="table" id="T8">T8 <span class="capacity">12</span></div>
+      <div class="table" id="T5">T5 <span class="capacity">4</span></div>
+      <div class="table" id="T2">T2 <span class="capacity">6</span></div>
+      <div class="table" id="T4">T4 <span class="capacity">2</span></div>
+      <div class="table" id="T6">T6 <span class="capacity">5</span></div>
+      <div class="table" id="T9">T9 <span class="capacity">10</span></div>
+      <div class="table" id="T10">T10 <span class="capacity">14</span></div> -->
+    </div>
+
+    <!-- <div class="calendar"> -->
+	    <div class="header">
+	        <button id="prev">❮</button>
+	        <div id="month-year">January 2023</div>
+	        <button id="next">❯</button>
+	    </div>
+	    <div class="days">
+	        <div class="day">Sun</div>
+	        <div class="day">Mon</div>
+	        <div class="day">Tue</div>
+	        <div class="day">Wed</div>
+	        <div class="day">Thu</div>
+	        <div class="day">Fri</div>
+	        <div class="day">Sat</div>
+	        <input type="hidden"  th:value="${resId}" name="resId" id="resId">
+	    </div>
+	    <div class="dates">
+	        <!-- Dates will be populated by JavaScript -->
+	    </div>
+	<!-- </div> -->
+
+	<p th:text="${msg}"></p>
+    <div class="time-picker">
+	      <label>Select Time</label>
+	      <div >
+		      <div class="time-options" >
+		       			<!-- time is populated by javascript -->
+		      </div>
+	      </div>
+    </div>
+
+    <input type="submit" class="next-button" id="nextBtn" value="Next">
+  </div>
+  </div>
+  
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="/js/reservation.js"></script>
+</body>
+</html>
